@@ -1,0 +1,306 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Westbridge University — Empowering Minds, Shaping Futures</title>
+    <link rel="stylesheet" href="styles.css" />
+    <!-- Google Fonts & Font Awesome Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+</head>
+<body>
+
+    <!-- Top Utility Announcement Bar -->
+    <div class="top-bar">
+        <div class="container top-bar-content">
+            <div class="top-info">
+                <span><i class="fa-solid fa-phone"></i> +1 (800) 555-WEST</span>
+                <span><i class="fa-solid fa-envelope"></i> admissions@westbridge.edu</span>
+                <span><i class="fa-solid fa-location-dot"></i> Westbridge Campus, MA</span>
+            </div>
+            <div class="top-links">
+                <a href="#interest"><i class="fa-solid fa-pen-to-square"></i> Apply Online</a>
+                <a href="#"><i class="fa-solid fa-graduation-cap"></i> Student Portal</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Navigation Header -->
+    <header class="main-header">
+        <div class="container navbar">
+            <a href="#" class="brand-logo">
+                <img src="logo.png" alt="Westbridge University" class="logo-icon">
+                <div class="brand-text">
+                    <span class="brand-name">WESTBRIDGE</span>
+                    <span class="brand-tagline">UNIVERSITY</span>
+                </div>
+            </a>
+            <nav class="nav-menu" id="nav-menu">
+                <ul>
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about">About Us</a></li>
+                    <li><a href="#courses">Programs</a></li>
+                    <li><a href="#campus-life">Campus Life</a></li>
+                    <li><a href="#interest" class="nav-btn">Register Interest</a></li>
+                </ul>
+            </nav>
+            <button class="mobile-toggle" id="mobile-toggle" aria-label="Toggle Navigation">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <main id="home">
+        <!-- Hero Carousel Section -->
+        <section class="hero-slider">
+            <div class="slide active" style="background-image: linear-gradient(rgba(15, 42, 74, 0.75), rgba(15, 42, 74, 0.75)), url('https://images.unsplash.com/photo-1541339907198-e08756dedf3f?auto=format&fit=crop&w=1920&q=80');">
+                <div class="container hero-content">
+                    <span class="hero-badge">Admissions Open 2026-27</span>
+                    <h1>Shape Your Future with World-Class Education</h1>
+                    <p>Discover industry-aligned programs, state-of-the-art research labs, and an active global alumni network.</p>
+                    <div class="hero-buttons">
+                        <a href="#courses" class="btn btn-primary">Explore Programs</a>
+                        <a href="#interest" class="btn btn-secondary">Apply Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slide" style="background-image: linear-gradient(rgba(15, 42, 74, 0.75), rgba(15, 42, 74, 0.75)), url('https://images.unsplash.com/photo-1523580494863-6f3031224c94?auto=format&fit=crop&w=1920&q=80');">
+                <div class="container hero-content">
+                    <span class="hero-badge">Innovative Learning Environment</span>
+                    <h1>Transforming Passion into Career Excellence</h1>
+                    <p>Experience hands-on experiential learning guided by top industry leaders and researchers.</p>
+                    <div class="hero-buttons">
+                        <a href="#interest" class="btn btn-primary">Get Consultation</a>
+                        <a href="#about" class="btn btn-secondary">Campus Tour</a>
+                    </div>
+                </div>
+            </div>
+            <div class="slider-controls">
+                <button id="prev-slide" aria-label="Previous Slide"><i class="fa-solid fa-chevron-left"></i></button>
+                <button id="next-slide" aria-label="Next Slide"><i class="fa-solid fa-chevron-right"></i></button>
+            </div>
+        </section>
+
+        <!-- Quick Stats Counter Bar -->
+        <section class="stats-bar">
+            <div class="container stats-grid">
+                <div class="stat-item">
+                    <i class="fa-solid fa-award"></i>
+                    <h3>#15</h3>
+                    <p>Top Ranked University</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-user-graduate"></i>
+                    <h3>25,000+</h3>
+                    <p>Global Alumni</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-book-open"></i>
+                    <h3>100+</h3>
+                    <p>Courses Offered</p>
+                </div>
+                <div class="stat-item">
+                    <i class="fa-solid fa-briefcase"></i>
+                    <h3>94%</h3>
+                    <p>Placement Success Rate</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section id="about" class="about-section container">
+            <div class="about-grid">
+                <div class="about-image">
+                    <img src="https://images.unsplash.com/photo-1498243691581-b145c3f54a5a?auto=format&fit=crop&w=800&q=80" 
+                         onerror="this.src='https://picsum.photos/800/600?random=10'" 
+                         alt="Westbridge Campus Library" />
+                    <div class="experience-badge">
+                        <span>35+</span>
+                        <p>Years of Academic Legacy</p>
+                    </div>
+                </div>
+                <div class="about-text">
+                    <h2>Welcome to Westbridge University</h2>
+                    <p class="lead">Driven by academic rigor, research innovation, and a vibrant diverse community.</p>
+                    <p>At Westbridge, we prepare leaders who thrive in a fast-evolving global ecosystem. Our interdisciplinary curriculum combines hands-on practical learning with strong foundations across technology, management, arts, and sciences.</p>
+                    <ul class="check-list">
+                        <li><i class="fa-solid fa-circle-check"></i> Globally Recognized Accreditation</li>
+                        <li><i class="fa-solid fa-circle-check"></i> State-of-the-Art Research Centers</li>
+                        <li><i class="fa-solid fa-circle-check"></i> 200+ Corporate Placement Partners</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Dynamic Course Catalog Section -->
+        <section id="courses" class="courses-section">
+            <div class="container">
+                <div class="section-header text-center">
+                    <h2>Featured Programs &amp; Courses</h2>
+                    <p>Explore our wide range of undergraduate, postgraduate, and specialized programs.</p>
+                </div>
+                <div id="course-catalog" class="course-grid">
+                    <p class="loading"><i class="fa-solid fa-spinner fa-spin"></i> Loading courses…</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Campus Highlights / Life Section (Updated Images + Fallbacks) -->
+        <section id="campus-life" class="campus-section container">
+            <div class="section-header text-center">
+                <h2>Life at Westbridge</h2>
+                <p>An inspiring campus environment designed for holistic student growth.</p>
+            </div>
+            <div class="campus-grid">
+                <div class="campus-card">
+                    <img src="https://images.unsplash.com/photo-1562774053-701939374585?auto=format&fit=crop&w=600&q=80" 
+                         onerror="this.src='https://picsum.photos/600/400?random=1'" 
+                         alt="Modern Campus Architecture" />
+                    <div class="campus-card-content">
+                        <h3>World-Class Infrastructure</h3>
+                        <p>Smart classrooms, advanced computer labs, and sprawling modern libraries.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="https://images.unsplash.com/photo-1574629810360-7efbbe195018?auto=format&fit=crop&w=600&q=80" 
+                         onerror="this.src='https://picsum.photos/600/400?random=2'" 
+                         alt="Sports Complex and Arena" />
+                    <div class="campus-card-content">
+                        <h3>Sports &amp; Athletics</h3>
+                        <p>Olympic-size swimming pool, indoor sports arenas, and synthetic athletic tracks.</p>
+                    </div>
+                </div>
+                <div class="campus-card">
+                    <img src="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?auto=format&fit=crop&w=600&q=80" 
+                         onerror="this.src='https://picsum.photos/600/400?random=3'" 
+                         alt="Student Life and Clubs" />
+                    <div class="campus-card-content">
+                        <h3>Student Clubs &amp; Culture</h3>
+                        <p>Over 50+ cultural, technical, and social leadership clubs to fuel your passion.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Registration & Interest Form Section -->
+        <section id="interest" class="interest-section">
+            <div class="container">
+                <div class="interest-wrapper">
+                    <div class="interest-info">
+                        <h2>Take the First Step Towards Your Future</h2>
+                        <p>Have questions regarding admissions, fee structures, or program choices? Fill out the form, and our admissions team will contact you shortly.</p>
+                        <div class="contact-highlights">
+                            <div class="highlight-item">
+                                <i class="fa-solid fa-headset"></i>
+                                <div>
+                                    <h4>Admission Helpline</h4>
+                                    <p>+1 (800) 555-WEST</p>
+                                </div>
+                            </div>
+                            <div class="highlight-item">
+                                <i class="fa-solid fa-clock"></i>
+                                <div>
+                                    <h4>Office Hours</h4>
+                                    <p>Mon - Sat: 9:00 AM - 5:00 PM</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-container">
+                        <h3>Register Your Interest</h3>
+                        <form id="interest-form">
+                            <div class="form-row">
+                                <label>
+                                    First Name *
+                                    <input type="text" id="first-name" placeholder="John" required />
+                                </label>
+                                <label>
+                                    Last Name *
+                                    <input type="text" id="last-name" placeholder="Doe" required />
+                                </label>
+                            </div>
+                            <div class="form-row">
+                                <label>
+                                    Email Address *
+                                    <input type="email" id="email" placeholder="john.doe@example.com" required />
+                                </label>
+                                <label>
+                                    Phone Number
+                                    <input type="tel" id="phone" placeholder="+1 555 0192" />
+                                </label>
+                            </div>
+                            <label>
+                                Program / Course of Interest
+                                <select id="program-select">
+                                    <option value="">Select a course (optional)</option>
+                                </select>
+                            </label>
+                            <label>
+                                Additional Comments or Questions
+                                <textarea id="message" rows="3" placeholder="Tell us about your background or queries..."></textarea>
+                            </label>
+                            <button type="submit" class="btn btn-submit">Submit Interest <i class="fa-solid fa-paper-plane"></i></button>
+                            <p id="form-status" aria-live="polite"></p>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="main-footer">
+        <div class="container footer-grid">
+            <div class="footer-col brand-col">
+                <div class="brand-logo">
+                    <img src="logo.png" alt="Westbridge University" class="logo-icon">
+                    <div class="brand-text">
+                        <span class="brand-name">WESTBRIDGE</span>
+                        <span class="brand-tagline">UNIVERSITY</span>
+                    </div>
+                </div>
+                <p>Empowering students with knowledge, leadership, and integrity to serve society globally.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
+                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
+                    <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
+                    <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h4>Quick Links</h4>
+                <ul>
+                    <li><a href="#about">About Westbridge</a></li>
+                    <li><a href="#courses">Academic Programs</a></li>
+                    <li><a href="#interest">Admissions 2026</a></li>
+                    <li><a href="#campus-life">Campus Facilities</a></li>
+                </ul>
+            </div>
+            <!-- <div class="footer-col">
+                <h4>Programs</h4>
+                <ul>
+                    <li><a href="#courses">Computer Science &amp; IT</a></li>
+                    <li><a href="#courses">Business Administration</a></li>
+                    <li><a href="#courses">Engineering &amp; Tech</a></li>
+                    <li><a href="#courses">Health &amp; Sciences</a></li>
+                </ul>
+            </div> -->
+            <div class="footer-col">
+                <h4>Contact Us</h4>
+                <p><i class="fa-solid fa-location-dot"></i> 100 University Blvd, Westbridge, MA 02101</p>
+                <p><i class="fa-solid fa-phone"></i> +1 (800) 555-WEST</p>
+                <p><i class="fa-solid fa-envelope"></i> info@westbridge.edu</p>
+            </div>
+        </div>
+        <div class="footer-bottom text-center">
+            <p>&copy; 2026 Westbridge University. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
