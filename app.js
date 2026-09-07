@@ -2,7 +2,7 @@
  * Westbridge University — public course-interest site.
  * Talks to guest REST endpoint for Westbridge programs & admissions interest.
  */
-const API_BASE_URL = 'https://agility-enterprise-310-dev-ed.scratch.my.site.com/vforcesite/services/apexrest/Chgon/v1/courseInterest';
+const API_BASE_URL = 'https://fun-app-67652-dev-ed.scratch.my.site.com/vforcesite/services/apexrest/Chgon/v1/courseInterest';
 
 const catalogEl = document.getElementById('course-catalog');
 const formEl = document.getElementById('interest-form');
