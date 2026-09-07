@@ -617,6 +617,26 @@ input:focus, select:focus, textarea:focus {
     color: var(--navy);
 }
 
+.referral-banner {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.75rem 1rem;
+    border: 1px solid var(--gold);
+    border-radius: 6px;
+    background: rgba(201, 162, 39, 0.08);
+    color: var(--navy);
+    font-size: 0.9rem;
+}
+
+.referral-banner[hidden] {
+    display: none;
+}
+
+.referral-banner strong {
+    letter-spacing: 0.05em;
+}
+
 #form-status {
     margin-top: 0.5rem;
     font-weight: 600;

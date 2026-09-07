@@ -213,6 +213,11 @@
                     <div class="form-container">
                         <h3>Register Your Interest</h3>
                         <form id="interest-form">
+                            <p id="referral-banner" class="referral-banner" hidden>
+                                <i class="fa-solid fa-gift"></i>
+                                You were referred by a Westbridge student — code
+                                <strong id="referral-banner-code"></strong> has been applied.
+                            </p>
                             <div class="form-row">
                                 <label>
                                     First Name *
@@ -238,6 +243,11 @@
                                 <select id="program-select">
                                     <option value="">Select a course (optional)</option>
                                 </select>
+                            </label>
+                            <label>
+                                Referral Code (optional)
+                                <input type="text" id="referral-code" maxlength="12" autocomplete="off"
+                                    placeholder="e.g. PATK7QW3MF" />
                             </label>
                             <label>
                                 Additional Comments or Questions
