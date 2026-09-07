@@ -2,7 +2,11 @@
  * Westbridge University — public course-interest site.
  * Talks to guest REST endpoint for Westbridge programs & admissions interest.
  */
-const API_BASE_URL = 'https://fun-app-67652-dev-ed.scratch.my.site.com/vforcesite/services/apexrest/Chgon/v1/courseInterest';
+// The path segment before /services/ is the hosting Force.com Site's UrlPathPrefix. The ChargeOn
+// site in this org has NO prefix, so there is none here — a stale '/vforcesite' 301-redirects into
+// /studentportalvforcesite/... and the call dies on the redirect. Check the prefix per org:
+//   SELECT Name, UrlPathPrefix FROM Site
+const API_BASE_URL = 'https://fun-app-67652-dev-ed.scratch.my.site.com/services/apexrest/Chgon/v1/courseInterest';
 
 const catalogEl = document.getElementById('course-catalog');
 const formEl = document.getElementById('interest-form');
