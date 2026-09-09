@@ -135,6 +135,7 @@ ul {
 #home,
 #about,
 #courses,
+#campus-life,
 #interest {
     scroll-margin-top: 96px;
 }
@@ -646,6 +647,24 @@ input:focus, select:focus, textarea:focus {
 
 .referral-banner strong {
     letter-spacing: 0.05em;
+}
+
+/* Live per-field validation (mirrors paymentFormScreen's on-input lightning-input errors) */
+input.field-invalid,
+input.field-invalid:focus {
+    border-color: #dc2626;
+    box-shadow: 0 0 0 3px rgba(220, 38, 38, 0.12);
+}
+
+.field-error-msg {
+    color: #dc2626;
+    font-size: 0.8rem;
+    font-weight: 500;
+    margin-top: 0.25rem;
+}
+
+.field-error-msg[hidden] {
+    display: none;
 }
 
 #form-status {

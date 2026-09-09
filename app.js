@@ -150,6 +150,77 @@ function clearStoredReferralCode() {
     if (referralBannerEl) referralBannerEl.hidden = true;
 }
 
+// --- Live field validation -------------------------------------------------
+// paymentFormScreen's lightning-inputs surface their message-when-pattern-mismatch as the
+// user types; plain <input> only reports on submit. These helpers reproduce that behaviour:
+// an error appears on input once the field has content, and clears the moment it is valid.
+const FIELD_RULES = [
+    { el: () => firstNameInputEl, pattern: NAME_PATTERN, required: true,
+      message: 'Please enter a valid first name (letters only).' },
+    { el: () => lastNameInputEl, pattern: NAME_PATTERN, required: true,
+      message: 'Please enter a valid last name (letters only).' },
+    { el: () => emailInputEl, pattern: EMAIL_PATTERN, required: true,
+      message: 'Invalid email format.' },
+    { el: () => phoneInputEl, pattern: PHONE_PATTERN, required: false,
+      message: 'Please enter a valid phone number (8-15 digits, optional + prefix).' }
+];
+
+// The message node lives next to the input inside its <label>, created on first use so the
+// markup stays clean and nothing shifts until there is something to say.
+function errorNodeFor(input) {
+    let node = input.nextElementSibling;
+    if (!node || !node.classList.contains('field-error-msg')) {
+        node = document.createElement('p');
+        node.className = 'field-error-msg';
+        node.hidden = true;
+        input.insertAdjacentElement('afterend', node);
+    }
+    return node;
+}
+
+// Returns true when the field passes. `silent` skips painting the error — used while the user
+// is still typing an untouched-but-incomplete value would otherwise flash red on keystroke 1.
+function validateField(rule, { showEmptyRequired = false } = {}) {
+    const input = rule.el();
+    if (!input) return true;
+
+    const value = input.value.trim();
+    const node = errorNodeFor(input);
+    let error = '';
+
+    if (!value) {
+        if (rule.required && showEmptyRequired) error = 'This field is required.';
+    } else if (!rule.pattern.test(value)) {
+        error = rule.message;
+    }
+
+    input.classList.toggle('field-invalid', Boolean(error));
+    node.textContent = error;
+    node.hidden = !error;
+    return !error;
+}
+
+function initLiveValidation() {
+    FIELD_RULES.forEach((rule) => {
+        const input = rule.el();
+        if (!input) return;
+        // input: validate as they type, but never nag about an empty required field mid-edit.
+        input.addEventListener('input', () => validateField(rule));
+        // blur: leaving a required field empty is a real error worth showing.
+        input.addEventListener('blur', () => validateField(rule, { showEmptyRequired: true }));
+    });
+}
+
+// Validates every field at once and focuses the first offender. Used by submit.
+function validateAllFields() {
+    let firstInvalid = null;
+    FIELD_RULES.forEach((rule) => {
+        const ok = validateField(rule, { showEmptyRequired: true });
+        if (!ok && !firstInvalid) firstInvalid = rule.el();
+    });
+    return firstInvalid;
+}
+
 // Live-sanitizes the Phone field, mirroring paymentFormScreen.js's phoneInputChange —
 // strips everything except digits, keeping a single leading '+', so invalid characters
 // never even appear. The `pattern` on the input still validates on submit as a backstop.
@@ -164,6 +235,13 @@ function phoneInputChange(event) {
     }
 }
 
+// The sanitiser rewrites the field value, so run the phone rule after it (the shared 'input'
+// listener registered by initLiveValidation may have already seen the pre-clean value).
+function phoneInputChangeThenValidate(event) {
+    phoneInputChange(event);
+    validateField(FIELD_RULES[3]);
+}
+
 // Handle Interest Form submission
 async function submitInterest(event) {
     event.preventDefault();
@@ -175,31 +253,12 @@ async function submitInterest(event) {
     const firstName = firstNameInputEl.value.trim();
     const lastName = lastNameInputEl.value.trim();
 
-    if (!NAME_PATTERN.test(firstName)) {
-        statusEl.textContent = 'Please enter a valid first name (letters only).';
+    // Same rules the live listeners use — re-run them all so a never-touched field is caught too.
+    const firstInvalid = validateAllFields();
+    if (firstInvalid) {
+        statusEl.textContent = 'Please correct the highlighted fields.';
         statusEl.className = 'error';
-        firstNameInputEl.focus();
-        return;
-    }
-
-    if (!NAME_PATTERN.test(lastName)) {
-        statusEl.textContent = 'Please enter a valid last name (letters only).';
-        statusEl.className = 'error';
-        lastNameInputEl.focus();
-        return;
-    }
-
-    if (!EMAIL_PATTERN.test(email)) {
-        statusEl.textContent = 'Please enter a valid email address.';
-        statusEl.className = 'error';
-        emailInputEl.focus();
-        return;
-    }
-
-    if (phone && !PHONE_PATTERN.test(phone)) {
-        statusEl.textContent = 'Please enter a valid phone number (8-15 digits, optional + prefix).';
-        statusEl.className = 'error';
-        phoneInputEl.focus();
+        firstInvalid.focus();
         return;
     }
 
@@ -292,8 +351,9 @@ document.addEventListener('DOMContentLoaded', () => {
         formEl.addEventListener('submit', submitInterest);
     }
     if (phoneInputEl) {
-        phoneInputEl.addEventListener('input', phoneInputChange);
+        phoneInputEl.addEventListener('input', phoneInputChangeThenValidate);
     }
+    initLiveValidation();
     initReferralCapture();
     initHeroSlider();
     initMobileMenu();
