@@ -21,6 +21,10 @@
     padding: 0;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     font-family: var(--font-body);
     background: var(--bg);
@@ -126,6 +130,13 @@ ul {
     position: sticky;
     top: 0;
     z-index: 1000;
+}
+
+#home,
+#about,
+#courses,
+#interest {
+    scroll-margin-top: 96px;
 }
 
 .navbar {

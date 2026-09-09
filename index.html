@@ -231,11 +231,13 @@
                             <div class="form-row">
                                 <label>
                                     Email Address *
-                                    <input type="email" id="email" placeholder="john.doe@example.com" required />
+                                    <input type="email" id="email" placeholder="john.doe@example.com" required
+                                        pattern="^[a-zA-Z0-9_\-+]+([.][a-zA-Z0-9_\-+]+)*@[a-zA-Z0-9\-]+([.][a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}$" />
                                 </label>
                                 <label>
                                     Phone Number
-                                    <input type="tel" id="phone" placeholder="+1 555 0192" />
+                                    <input type="tel" id="phone" placeholder="+1 555 0192"
+                                        pattern="^[+]?[0-9]{8,15}$" />
                                 </label>
                             </div>
                             <label>
@@ -276,7 +278,6 @@
                 <p>Empowering students with knowledge, leadership, and integrity to serve society globally.</p>
                 <div class="social-links">
                     <a href="#" aria-label="Facebook"><i class="fa-brands fa-facebook-f"></i></a>
-                    <a href="#" aria-label="Twitter"><i class="fa-brands fa-x-twitter"></i></a>
                     <a href="#" aria-label="LinkedIn"><i class="fa-brands fa-linkedin-in"></i></a>
                     <a href="#" aria-label="Instagram"><i class="fa-brands fa-instagram"></i></a>
                 </div>

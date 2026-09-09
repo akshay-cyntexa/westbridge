@@ -19,6 +19,15 @@ const referralBannerCodeEl = document.getElementById('referral-banner-code');
 const REFERRAL_STORAGE_KEY = 'wbu_referral_code';
 const REFERRAL_MAX_LENGTH = 12;
 
+// Same patterns as force-app/main/default/lwc/paymentFormScreen/paymentFormScreen.html
+// (customer_email / customer_phone inputs) — kept identical so validation is consistent
+// across ChargeOn's payment form and this public site.
+const EMAIL_PATTERN = /^[a-zA-Z0-9_\-+]+([.][a-zA-Z0-9_\-+]+)*@[a-zA-Z0-9\-]+([.][a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}$/;
+const PHONE_PATTERN = /^[+]?[0-9]{8,15}$/;
+
+const emailInputEl = document.getElementById('email');
+const phoneInputEl = document.getElementById('phone');
+
 // Mirror of WestbridgeCourseInterestSiteAPI.normalizeReferralCode — uppercase, alnum only, trimmed to 12.
 function normalizeReferralCode(raw) {
     if (!raw) return '';
@@ -123,17 +132,60 @@ function restoreReferralCodeAfterReset() {
     if (code) referralInputEl.value = code;
 }
 
+// Called once the referral has actually been used (a successful submission) so it
+// doesn't keep auto-applying itself to every future visit/submission from this browser.
+function clearStoredReferralCode() {
+    try {
+        window.localStorage.removeItem(REFERRAL_STORAGE_KEY);
+    } catch (err) {
+        /* storage blocked (private mode) — nothing to clear */
+    }
+    if (referralInputEl) referralInputEl.value = '';
+    if (referralBannerEl) referralBannerEl.hidden = true;
+}
+
+// Live-sanitizes the Phone field, mirroring paymentFormScreen.js's phoneInputChange —
+// strips everything except digits, keeping a single leading '+', so invalid characters
+// never even appear. The `pattern` on the input still validates on submit as a backstop.
+function phoneInputChange(event) {
+    const raw = event.target.value || '';
+    const hasLeadingPlus = raw.trimStart().startsWith('+');
+    const digits = raw.replace(/[^0-9]/g, '');
+    const cleaned = (hasLeadingPlus ? '+' : '') + digits;
+
+    if (raw !== cleaned) {
+        event.target.value = cleaned;
+    }
+}
+
 // Handle Interest Form submission
 async function submitInterest(event) {
     event.preventDefault();
     statusEl.textContent = '';
     statusEl.className = '';
 
+    const email = emailInputEl.value.trim();
+    const phone = phoneInputEl.value.trim();
+
+    if (!EMAIL_PATTERN.test(email)) {
+        statusEl.textContent = 'Please enter a valid email address.';
+        statusEl.className = 'error';
+        emailInputEl.focus();
+        return;
+    }
+
+    if (phone && !PHONE_PATTERN.test(phone)) {
+        statusEl.textContent = 'Please enter a valid phone number (8-15 digits).';
+        statusEl.className = 'error';
+        phoneInputEl.focus();
+        return;
+    }
+
     const payload = {
         firstName: document.getElementById('first-name').value.trim(),
         lastName: document.getElementById('last-name').value.trim(),
-        email: document.getElementById('email').value.trim(),
-        phone: document.getElementById('phone').value.trim(),
+        email,
+        phone,
         programId: programSelectEl.value || null,
         message: document.getElementById('message').value.trim()
     };
@@ -158,7 +210,7 @@ async function submitInterest(event) {
         statusEl.className = result.success !== false ? 'success' : 'error';
         if (result.success !== false) {
             formEl.reset();
-            restoreReferralCodeAfterReset();
+            clearStoredReferralCode();
         }
     } catch (err) {
         statusEl.textContent = 'We could not submit your interest. Please try again.';
@@ -216,6 +268,9 @@ function initMobileMenu() {
 document.addEventListener('DOMContentLoaded', () => {
     if (formEl) {
         formEl.addEventListener('submit', submitInterest);
+    }
+    if (phoneInputEl) {
+        phoneInputEl.addEventListener('input', phoneInputChange);
     }
     initReferralCapture();
     initHeroSlider();
