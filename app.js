@@ -24,9 +24,15 @@ const REFERRAL_MAX_LENGTH = 12;
 // across ChargeOn's payment form and this public site.
 const EMAIL_PATTERN = /^[a-zA-Z0-9_\-+]+([.][a-zA-Z0-9_\-+]+)*@[a-zA-Z0-9\-]+([.][a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}$/;
 const PHONE_PATTERN = /^[+]?[0-9]{8,15}$/;
+// paymentFormScreen validates ONE "Payer Name" field and so requires two words
+// (^[A-Za-z]+(\s[A-Za-z]+)+$). This site splits that into First/Last, so each part is
+// validated on its own: letters, with spaces only between words (e.g. "Mary Jane").
+const NAME_PATTERN = /^[A-Za-z]+(\s[A-Za-z]+)*$/;
 
 const emailInputEl = document.getElementById('email');
 const phoneInputEl = document.getElementById('phone');
+const firstNameInputEl = document.getElementById('first-name');
+const lastNameInputEl = document.getElementById('last-name');
 
 // Mirror of WestbridgeCourseInterestSiteAPI.normalizeReferralCode — uppercase, alnum only, trimmed to 12.
 function normalizeReferralCode(raw) {
@@ -166,6 +172,22 @@ async function submitInterest(event) {
 
     const email = emailInputEl.value.trim();
     const phone = phoneInputEl.value.trim();
+    const firstName = firstNameInputEl.value.trim();
+    const lastName = lastNameInputEl.value.trim();
+
+    if (!NAME_PATTERN.test(firstName)) {
+        statusEl.textContent = 'Please enter a valid first name (letters only).';
+        statusEl.className = 'error';
+        firstNameInputEl.focus();
+        return;
+    }
+
+    if (!NAME_PATTERN.test(lastName)) {
+        statusEl.textContent = 'Please enter a valid last name (letters only).';
+        statusEl.className = 'error';
+        lastNameInputEl.focus();
+        return;
+    }
 
     if (!EMAIL_PATTERN.test(email)) {
         statusEl.textContent = 'Please enter a valid email address.';
@@ -175,15 +197,15 @@ async function submitInterest(event) {
     }
 
     if (phone && !PHONE_PATTERN.test(phone)) {
-        statusEl.textContent = 'Please enter a valid phone number (8-15 digits).';
+        statusEl.textContent = 'Please enter a valid phone number (8-15 digits, optional + prefix).';
         statusEl.className = 'error';
         phoneInputEl.focus();
         return;
     }
 
     const payload = {
-        firstName: document.getElementById('first-name').value.trim(),
-        lastName: document.getElementById('last-name').value.trim(),
+        firstName,
+        lastName,
         email,
         phone,
         programId: programSelectEl.value || null,

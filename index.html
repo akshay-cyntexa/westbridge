@@ -221,23 +221,29 @@
                             <div class="form-row">
                                 <label>
                                     First Name *
-                                    <input type="text" id="first-name" placeholder="John" required />
+                                    <input type="text" id="first-name" placeholder="John" required
+                                        pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+                                        title="Please enter a valid first name (letters only)." />
                                 </label>
                                 <label>
                                     Last Name *
-                                    <input type="text" id="last-name" placeholder="Doe" required />
+                                    <input type="text" id="last-name" placeholder="Doe" required
+                                        pattern="^[A-Za-z]+(\s[A-Za-z]+)*$"
+                                        title="Please enter a valid last name (letters only)." />
                                 </label>
                             </div>
                             <div class="form-row">
                                 <label>
                                     Email Address *
                                     <input type="email" id="email" placeholder="john.doe@example.com" required
-                                        pattern="^[a-zA-Z0-9_\-+]+([.][a-zA-Z0-9_\-+]+)*@[a-zA-Z0-9\-]+([.][a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}$" />
+                                        pattern="^[a-zA-Z0-9_\-+]+([.][a-zA-Z0-9_\-+]+)*@[a-zA-Z0-9\-]+([.][a-zA-Z0-9\-]+)*\.[a-zA-Z]{2,}$"
+                                        title="Invalid email format." />
                                 </label>
                                 <label>
                                     Phone Number
                                     <input type="tel" id="phone" placeholder="+1 555 0192"
-                                        pattern="^[+]?[0-9]{8,15}$" />
+                                        pattern="^[+]?[0-9]{8,15}$"
+                                        title="Please enter a valid phone number (8-15 digits, optional + prefix)." />
                                 </label>
                             </div>
                             <label>
