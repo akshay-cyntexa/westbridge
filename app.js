@@ -6,8 +6,7 @@
 // site in this org has NO prefix, so there is none here — a stale '/vforcesite' 301-redirects into
 // /studentportalvforcesite/... and the call dies on the redirect. Check the prefix per org:
 //   SELECT Name, UrlPathPrefix FROM Site
-const API_BASE_URL = 'https://fun-app-67652-dev-ed.scratch.my.site.com/services/apexrest/Chgon/v1/courseInterest';
-
+const API_BASE_URL = 'https://enterprise-nosoftware-9307-dev-ed.scratch.my.site.com/services/apexrest/Chgon/v1/courseInterest';
 const catalogEl = document.getElementById('course-catalog');
 const formEl = document.getElementById('interest-form');
 const programSelectEl = document.getElementById('program-select');
